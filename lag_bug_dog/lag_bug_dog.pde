@@ -1,11 +1,24 @@
 import java.io.*;
+import java.util.*;
 String vowels = "aeiouy";
 String consonants = "bcdfghjklmnpqrstvwxz";
 String ans = "";
 String str;
-void setup() {
+String[] wordsArray;
+ArrayList<String> words = new ArrayList<String>();
+ArrayList<String> threeLetterWords= new ArrayList<String>();
+
+void setup(){
   size(800, 500);
   background(#FFFFFF);
+  File file = new File("C:\\Users\\c3po7\\Documents\\GitHub\\processing-stuff\\lag_bug_dog\\english5000.txt");
+  wordsArray = loadStrings(file);
+  for(int i = 0;i < wordsArray.length;i++){
+    words.add(wordsArray[i]); 
+  }
+  for(int i = 0;i<words.size();i++){
+    if(words.get(i).length() == 3) threeLetterWords.add(words.get(i));  
+  }
 }
 ArrayList<String> cArray = new ArrayList<String>(20);
 public String c() {
@@ -48,15 +61,14 @@ void keyPressed() {
     fill(0, 0, 0);
     int x = 100;
     int y = 100;
-    for(int i = 0;i < 12;i++) {
+    while( x <= 800 && y <= 400) {
       ans += getFirstLetter();
       for(int j = 0;j<2;j++) {
         String c = ans.substring(j, j + 1);
         ans += getNextLetter(c);
       }
-      text(ans, x, y);
-      x+= 200;
-      if(x > 600) {
+      if(threeLetterWords.indexOf(ans) != -1){ text(ans, x, y); x+= 200; }
+      if(x > 800) {
         x = 100;
         y += 100;
       }
