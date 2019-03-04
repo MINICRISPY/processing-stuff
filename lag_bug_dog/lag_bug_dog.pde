@@ -2,7 +2,9 @@ import java.io.*;
 import java.util.*;
 String vowels = "aeiouy";
 String consonants = "bcdfghjklmnpqrstvwxz";
+ArrayList<String> vArray = new ArrayList<String>(6);
 String ans = "";
+ArrayList<String> prevAns = new ArrayList<String>();
 String str;
 String[] wordsArray;
 ArrayList<String> words = new ArrayList<String>();
@@ -20,34 +22,10 @@ void setup(){
     if(words.get(i).length() == 3) threeLetterWords.add(words.get(i));  
   }
 }
-ArrayList<String> cArray = new ArrayList<String>(20);
-public String c() {
-  for(int i = 0;i<cArray.size();i++){
-    cArray.add(consonants.substring(i, i + 1));
-  }
-  int a = (int)random(0, 19);
-  String c = consonants.substring(a, a + 1);
-  print(c);
-  return c;
-} 
-ArrayList<String> vArray = new ArrayList<String>(6);
-public String v() {
-  for(int i = 0;i<vArray.size();i++){
+public boolean isV(String c) {
+  for(int i = 0;i < vArray.size();i++)
     vArray.add(vowels.substring(i, i + 1));
-  }
-  int a = (int)random(0, 5);
-  String c = vowels.substring(a, a + 1);
-  print(c);
-  return c;
-}
-public String p() {
-  String punctuations = " .,!?-/";
-  int a = (int)random(0, 5);
-  String c = punctuations.substring(a, a + 1);
-  return c;
-}
-public boolean isC(String c) {
-  for(String d : cArray) {
+  for(String d : vArray) {
     if(d.equals(c)) return true;
   }
   return false;
@@ -61,18 +39,14 @@ void keyPressed() {
     fill(0, 0, 0);
     int x = 100;
     int y = 100;
-    while( x <= 800 && y <= 400) {
-      ans += getFirstLetter();
-      for(int j = 0;j<2;j++) {
-        String c = ans.substring(j, j + 1);
-        ans += getNextLetter(c);
-      }
-      if(threeLetterWords.indexOf(ans) != -1){ text(ans, x, y); x+= 200; }
-      if(x > 800) {
+    //while( x <= 800 && y <= 400) {
+      word(3, "noun", x, y);
+      /*if(x > 800) {
         x = 100;
         y += 100;
-      }
+      }*/
       ans = "";
-    }
+    //}
+    //prevAns.clear();
   }
 }
