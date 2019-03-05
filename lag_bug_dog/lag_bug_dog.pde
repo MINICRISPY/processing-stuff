@@ -39,14 +39,22 @@ void keyPressed() {
     fill(0, 0, 0);
     int x = 100;
     int y = 100;
-    //while( x <= 800 && y <= 400) {
-      word(3, "noun", x, y);
-      /*if(x > 800) {
+    while( x <= 800 && y <= 400) {
+      ans += getFirstLetter();
+      for(int j = 0;j<2;j++) {
+        String c = ans.substring(j, j + 1);
+        ans += getNextLetter(c);
+      }
+      if(threeLetterWords.indexOf(ans) != -1){
+        if(prevAns.indexOf(ans) == -1){ text(ans, x, y); x+= 200; }
+      prevAns.add(ans);
+      }
+      if(x > 800) {
         x = 100;
         y += 100;
-      }*/
+      }
       ans = "";
-    //}
-    //prevAns.clear();
+    }
+    prevAns.clear();
   }
 }
