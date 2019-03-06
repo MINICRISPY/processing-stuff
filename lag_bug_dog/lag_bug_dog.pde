@@ -35,18 +35,11 @@ void draw() {
 void keyPressed() {
   if(key == ENTER) {
     background(#FFFFFF);
-    textSize(32);
+    textSize(64);
     fill(0, 0, 0);
-    int x = 100;
-    int y = 100;
-    //while( x <= 800 && y <= 400) {
-      word(3, "noun", x, y);
-      /*if(x > 800) {
-        x = 100;
-        y += 100;
-      }*/
-      ans = "";
-    //}
-    //prevAns.clear();
+    int x;
+    int y;
+    word(3, 325, 225);
+    ans = "";
   }
 }
