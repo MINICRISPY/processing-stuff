@@ -1,5 +1,9 @@
 import java.io.*;
 import java.util.*;
+int x = 100;
+int y = 100;
+int count = 0;
+boolean done = false;
 String vowels = "aeiouy";
 String consonants = "bcdfghjklmnpqrstvwxz";
 ArrayList<String> vArray = new ArrayList<String>(6);
@@ -34,27 +38,35 @@ void draw() {
 }
 void keyPressed() {
   if(key == ENTER) {
-    background(#FFFFFF);
-    textSize(32);
-    fill(0, 0, 0);
-    int x = 100;
-    int y = 100;
-    while( x <= 800 && y <= 400) {
-      ans += getFirstLetter();
-      for(int j = 0;j<2;j++) {
-        String c = ans.substring(j, j + 1);
-        ans += getNextLetter(c);
+    boolean done = false;
+    ans = word(3);
+    while(!done) {
+      if(threeLetterWords.indexOf(ans) != -1){ // Checks if the word is a real three letter word
+        if(prevAns.indexOf(ans) == -1){ // Checks if the word has not already been returned
+          textSize(64);
+          fill(0, 0, 0);
+          if(x == 100 && y == 100) {
+                        background(#FFFFFF);
+                      }
+          text(ans, x, y);
+          prevAns.add(ans);
+          x += 200;
+          if(x > 500) {
+            x = 100;
+            y += 100;
+            if(y > 450) {
+              x = 100;
+              y = 100;
+            }
+          }
+          ans = "";
+          done = true;
+        }
+        else { ans = ""; ans = word(3); }
       }
-      if(threeLetterWords.indexOf(ans) != -1){
-        if(prevAns.indexOf(ans) == -1){ text(ans, x, y); x+= 200; }
-      prevAns.add(ans);
-      }
-      if(x > 800) {
-        x = 100;
-        y += 100;
-      }
-      ans = "";
+      else { ans = ""; ans = word(3); }
     }
     prevAns.clear();
   }
+  if(prevAns.size() > 139) prevAns.clear();
 }
