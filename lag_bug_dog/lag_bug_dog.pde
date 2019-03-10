@@ -1,9 +1,7 @@
 import java.io.*;
 import java.util.*;
-int x = 100;
-int y = 100;
-int count = 0;
-boolean done = false;
+int x = 100; // 325 for center
+int y = 100; //225 for center
 String vowels = "aeiouy";
 String consonants = "bcdfghjklmnpqrstvwxz";
 ArrayList<String> vArray = new ArrayList<String>(6);
@@ -37,36 +35,38 @@ public boolean isV(String c) {
 void draw() {
 }
 void keyPressed() {
-  if(key == ENTER) {
+  //if(key == ENTER) {
+    int count = 0;
+    int l = (int)random(3, 6);
     boolean done = false;
-    ans = word(3);
+    ans = word(4);
     while(!done) {
-      if(threeLetterWords.indexOf(ans) != -1){ // Checks if the word is a real three letter word
+      if(words.indexOf(ans) != -1 && ans.length() == l){ // Checks if the word is a real three letter word
         if(prevAns.indexOf(ans) == -1){ // Checks if the word has not already been returned
-          textSize(64);
-          fill(0, 0, 0);
-          if(x == 100 && y == 100) {
-                        background(#FFFFFF);
-                      }
-          text(ans, x, y);
-          prevAns.add(ans);
-          x += 200;
-          if(x > 500) {
-            x = 100;
-            y += 100;
-            if(y > 450) {
-              x = 100;
-              y = 100;
-            }
-          }
-          ans = "";
-          done = true;
+        PFont font;
+        font = createFont("Monospaced.plain", 64);
+        textSize(64);
+        textFont(font);
+        fill(0, 0, 0);
+        if(x == 100 && y == 100) {
+          background(#FFFFFF);
         }
-        else { ans = ""; ans = word(3); }
+        text(ans, x, y);
+        x += 32*l + 50;
+        if(x > 500) {
+          x = 100;
+          y += 100;
+          if(y > 450) {
+            x = 100;
+            y = 100;
+          }
+        }
+        ans = "";
+        done = true;
       }
-      else { ans = ""; ans = word(3); }
+        else { ans = ""; ans = word(l); }
+      }
+      else { ans = ""; ans = word(l); }
     }
-    prevAns.clear();
-  }
-  if(prevAns.size() > 139) prevAns.clear();
+  //}
 }
