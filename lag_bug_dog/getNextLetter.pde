@@ -1,4 +1,4 @@
-// This method chooses the next letter based on the letter before it (Currently only 
+// This method chooses the next letter based on the letter before it (Currently only alternates consonant and vowel)    
 private int randV;
 private int randC;
 public String getNextLetter(String c) {

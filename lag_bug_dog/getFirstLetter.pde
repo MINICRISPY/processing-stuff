@@ -1,3 +1,4 @@
+// This method chooses the first letter based on some proportions I found online
 private int rand;
 public String getFirstLetter() {
   rand = (int)random(0, 15501);
