@@ -1,18 +1,14 @@
 import java.io.*;
 import java.util.*;
-int x = 100;
-int y = 100;
-int count = 0;
-boolean done = false;
+int x = 100; // 325 for center
+int y = 100; //225 for center
+String k;
+String ans;
 String vowels = "aeiouy";
 String consonants = "bcdfghjklmnpqrstvwxz";
-ArrayList<String> vArray = new ArrayList<String>(6);
-String ans = "";
-ArrayList<String> prevAns = new ArrayList<String>();
-String str;
 String[] wordsArray;
 ArrayList<String> words = new ArrayList<String>();
-ArrayList<String> threeLetterWords= new ArrayList<String>();
+ArrayList<String> vArray = new ArrayList<String>(6);
 
 void setup(){
   size(800, 500);
@@ -21,9 +17,6 @@ void setup(){
   wordsArray = loadStrings(file);
   for(int i = 0;i < wordsArray.length;i++){
     words.add(wordsArray[i]); 
-  }
-  for(int i = 0;i<words.size();i++){
-    if(words.get(i).length() == 3) threeLetterWords.add(words.get(i));  
   }
 }
 public boolean isV(String c) {
@@ -37,35 +30,38 @@ public boolean isV(String c) {
 void draw() {
 }
 void keyPressed() {
-  if(key == ENTER) {
-    boolean done = false;
-    ans = word(3);
-    while(!done) {
-      if(threeLetterWords.indexOf(ans) != -1){ // Checks if the word is a real three letter word
-        if(prevAns.indexOf(ans) == -1){ // Checks if the word has not already been returned
-          textSize(64);
-          fill(0, 0, 0);
-          if(x == 100 && y == 100) {
-                        background(#FFFFFF);
-                      }
-          text(ans, x, y);
-          prevAns.add(ans);
-          x += 200;
-          if(x > 500) {
-            x = 100;
-            y += 100;
-            if(y > 450) {
-              x = 100;
-              y = 100;
-            }
-          }
-          ans = "";
-          done = true;
-        }
-        else { ans = ""; ans = word(3); }
+  int count = 0;
+  boolean isKey = (vowels.indexOf(key) != -1 || consonants.indexOf(key) != -1);
+  k = Character.toString(key);
+  int l = (int)random(3, 6);
+  boolean done = false;
+  ans = isKey ? word(l, k) : word(l);
+  while(!done) {
+    if(words.indexOf(ans) != -1 && ans.length() == l){ // Checks if the word is a real word
+      PFont font;
+      font = createFont("Monospaced.plain", 64);
+      textSize(64);
+      textFont(font);
+      fill(0, 0, 0);
+      if(x == 100 && y == 100) {
+        background(#FFFFFF);
       }
-      else { ans = ""; ans = word(3); }
+      text(ans, x, y);
+      x += 32*l + 64;
+      if(x > 500) {
+        x = 100;
+        y += 100;
+        if(y > 450) {
+          x = 100;
+          y = 100;
+        }
+      }
+      ans = "";
+      done = true;
+    }
+    else {
+      ans = "";
+      ans = isKey ? word(l, k) : word(l);
     }
   }
-  if(prevAns.size() > 139) prevAns.clear();
 }
