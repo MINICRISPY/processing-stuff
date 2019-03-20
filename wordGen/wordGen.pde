@@ -53,6 +53,7 @@ void keyPressed() {
       if(prevAns.indexOf(ans) == -1) { // Checks if the word is already on the screen
         text(ans, x, y);
         prevAns.add(ans);
+        
         x += 32*l + 64; // Makes the words appear in a 4x4 grid onscreen, clears the screen once it's full
         if(x > 580) {
           x = 100;
