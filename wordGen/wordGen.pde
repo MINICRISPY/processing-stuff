@@ -14,8 +14,7 @@ ArrayList<String> prevAns = new ArrayList<String>();
 void setup(){
   size(800, 500);
   background(#FFFFFF);
-  File file = new File("C:\\Users\\c3po7\\Documents\\GitHub\\processing-stuff\\wordGen\\english5000.txt");
-  File file2 = new File("H://wordGen\\english5000.txt");
+  File file = new File("C:\\Users\\c3po7\\OneDrive\\Documents\\GitHub\\processing-stuff\\wordGen\\english5000.txt");
   wordsArray = loadStrings(file);
   for(int i = 0;i < wordsArray.length;i++){
     words.add(wordsArray[i]); 
@@ -32,7 +31,6 @@ public boolean isV(String c) {
 void draw() {
 }
 void keyPressed() {
-  int count = 0;
   boolean isKey = (vowels.indexOf(key) != -1 || consonants.indexOf(key) != -1);
   k = Character.toString(key);
   int l = 3;//(int)random(3, 6);
